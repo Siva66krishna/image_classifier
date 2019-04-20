@@ -1,0 +1,7 @@
+* Doesn't Check the Command Line Arguments because 'get_input_args' hasn't been defined.
+* Doesn't Check the Results Dictionary because 'get_pet_labels' hasn't been defined.
+* Doesn't Check the Results Dictionary because 'classify_images' hasn't been defined.
+* Doesn't Check the Results Dictionary because 'adjust_results4_isadog' hasn't been defined.
+* Doesn't Check the Results Dictionary because 'calculates_results_stats' hasn't been defined.
+
+** Total Elapsed Runtime: 0:0:0
