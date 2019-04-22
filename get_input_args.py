@@ -17,9 +17,9 @@
 # Imports python modules
 import argparse
 
-# TODO 1: Define get_input_args function below please be certain to replace None
-#       in the return statement with parser.parse_args() parsed argument 
-#       collection that you created with this function
+# Define get_input_args function below please be certain to replace None
+# in the return statement with parser.parse_args() parsed argument 
+# collection that you created with this function
 # 
 def get_input_args():
     """
@@ -38,6 +38,35 @@ def get_input_args():
     Returns:
      parse_args() -data structure that stores the command line arguments object  
     """
-    # Replace None with parser.parse_args() parsed argument collection that 
-    # you created with this function 
-    return None
+
+    parser = argparse.ArgumentParser()
+
+    # Creates 3 command line arguments args.dir for path to images files,
+    # args.arch which CNN model to use for classification, args.labels path to
+    # text file with names of dogs. 
+    # replace test_pet_images with pet_images
+    parser.add_argument('--dir', type=str, default='pet_images/', 
+                        help='path to folder of images')
+    parser.add_argument('--arch', default = 'resnet', help = 'the CNN model architecture')
+    parser.add_argument('--dogfile', default = 'dognames.txt', help = 'text file of names of dog breeds')
+
+    return parser.parse_args()
+
+def check_command_line_arguments(in_arg):
+    """
+    For Lab: Classifying Images - 7. Command Line Arguments
+    Prints each of the command line arguments passed in as parameter in_arg, 
+    assumes you defined all three command line arguments as outlined in 
+    '7. Command Line Arguments'
+    Parameters:
+     in_arg -data structure that stores the command line arguments object
+    Returns:
+     Nothing - just prints to console  
+    """
+    if in_arg is None:
+        print("* Doesn't Check the Command Line Arguments because 'get_input_args' hasn't been defined.")
+    else:
+        # prints command line agrs
+        print("Command Line Arguments:\n     dir =", in_arg.dir, 
+              "\n    arch =", in_arg.arch, "\n dogfile =", in_arg.dogfile)
+

@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/classify_images.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:                                 
-# REVISED DATE: 
+# PROGRAMMER: Sivakrishna Uppalamethi
+# DATE CREATED: April 22, 2019                           
+# REVISED DATE: April 22, 2019
 # PURPOSE: Create a function classify_images that uses the classifier function 
 #          to create the classifier labels and then compares the classifier 
-#          labels to the pet image labels. This function inputs:
+#          labels to the pet image labels. 
+# 		   This function inputs:
 #            -The Image Folder as image_dir within classify_images and function 
 #             and as in_arg.dir for function call within main. 
 #            -The results dictionary as results_dic within classify_images 
@@ -22,6 +23,7 @@
 ##
 # Imports classifier function for using CNN to classify images 
 from classifier import classifier 
+import util
 
 # TODO 3: Define classify_images function below, specifically replace the None
 #       below by the function definition of the classify_images function. 
@@ -57,12 +59,38 @@ def classify_images(images_dir, results_dic, model):
                   index 0 = pet image label (string)
                 --- where index 1 & index 2 are added by this function ---
                   NEW - index 1 = classifier label (string)
-                  NEW - index 2 = 1/0 (int)  where 1 = match between pet image
-                    and classifer labels and 0 = no match between labels
+                  NEW - index 2 = 1/0 (int)  where 1 = match between pet image label
+                    and classifer label and 0 = no match between labels
       model - Indicates which CNN model architecture will be used by the 
               classifier function to classify the pet images,
               values must be either: resnet alexnet vgg (string)
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    None 
+
+    # Format the images_dir - to include / or not by checking the dir name    
+    updated_images_dir = util.format_dir_name(images_dir)
+
+    # 1. Iterate through each file name i.e. key in the reults dict and 
+    # pass the key as file name to the classifier
+    for file_name_key in results_dic:
+      image_full_path = "{}{}".format(updated_images_dir, file_name_key)
+      
+      #print(image_full_path)
+      # Get the classifier label for the given image
+      image_classification = classifier(image_full_path, model)
+
+      # print(image_classification)
+
+      # Append the classifier label to the dictionary value (list) at index 1
+      dic_value = results_dic.get(file_name_key)
+      dic_value.append(image_classification.strip().lower())
+      
+      # Append the comparison value 0 or 1 to the dictionary value (list) at index 2
+      # if petlabel present in classified label - 1 else 0
+      if (dic_value[0] in dic_value[1]):        
+        dic_value.append(1)
+      else:       
+        dic_value.append(0)
+
+    #print(results_dic) 

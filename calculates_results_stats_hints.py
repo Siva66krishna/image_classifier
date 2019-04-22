@@ -101,7 +101,7 @@ def calculates_results_stats(results_dic):
         # Pet Image Label is a Dog AND Labels match- counts Correct Breed
         pass
         
-        # Pet Image Label is a Dog - counts number of dog images
+        # If Pet Image Label is a Dog - counts number of dog images
         if results_dic[key][3] == 1:
             results_stats_dic['n_dogs_img'] += 1
             
