@@ -1,7 +1,74 @@
-* Doesn't Check the Command Line Arguments because 'get_input_args' hasn't been defined.
-* Doesn't Check the Results Dictionary because 'get_pet_labels' hasn't been defined.
-* Doesn't Check the Results Dictionary because 'classify_images' hasn't been defined.
-* Doesn't Check the Results Dictionary because 'adjust_results4_isadog' hasn't been defined.
-* Doesn't Check the Results Dictionary because 'calculates_results_stats' hasn't been defined.
+Command Line Arguments:
+     dir = uploaded_images/ 
+    arch = alexnet 
+ dogfile = dognames.txt
+
+Pet Image Label Dictionary has 4 key-value pairs.
+Below are 4 of them:
+ 1 key:              Coffee_Mug_01.jpg  label:                 coffee mug
+ 2 key:                     Dog_01.jpg  label:                        dog
+ 3 key:                     Dog_02.jpg  label:                        dog
+ 4 key:              Polar_Bear_01.jpg  label:                 polar bear
+
+     MATCH:
+
+                    Dog_01.jpg: 
+Real:                        dog   Classifier: dalmatian, coach dog, carriage dog
+
+                    Dog_02.jpg: 
+Real:                        dog   Classifier: dalmatian, coach dog, carriage dog
+
+             Polar_Bear_01.jpg: 
+Real:                 polar bear   Classifier: ice bear, polar bear, ursus maritimus, thalarctos maritimus
+
+ NOT A MATCH:
+
+             Coffee_Mug_01.jpg: 
+Real:                 coffee mug   Classifier:                            cup
+
+# Total Images 4 # Matches: 3 # NOT Matches: 1
+
+     MATCH:
+
+                    Dog_01.jpg: 
+Real:                        dog   Classifier: dalmatian, coach dog, carriage dog  
+PetLabelDog: 1  ClassLabelDog: 1
+
+                    Dog_02.jpg: 
+Real:                        dog   Classifier: dalmatian, coach dog, carriage dog  
+PetLabelDog: 1  ClassLabelDog: 1
+
+             Polar_Bear_01.jpg: 
+Real:                 polar bear   Classifier: ice bear, polar bear, ursus maritimus, thalarctos maritimus  
+PetLabelDog: 0  ClassLabelDog: 0
+
+ NOT A MATCH:
+
+             Coffee_Mug_01.jpg: 
+Real:                 coffee mug   Classifier:                            cup  
+PetLabelDog: 0  ClassLabelDog: 0
+
+# Total Images 4 # Matches: 3 # NOT Matches: 1
+{'Coffee_Mug_01.jpg': ['coffee mug', 'cup', 0, 0, 0], 'Dog_01.jpg': ['dog', 'dalmatian, coach dog, carriage dog', 1, 1, 1], 'Dog_02.jpg': ['dog', 'dalmatian, coach dog, carriage dog', 1, 1, 1], 'Polar_Bear_01.jpg': ['polar bear', 'ice bear, polar bear, ursus maritimus, thalarctos maritimus', 1, 0, 0]}
+
+ ** Statistics from calculates_results_stats() function:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed: 100.0
+
+ ** Check Statistics - calculated from this function as a check:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed: 100.0
+{'n_images': 4, 'n_dogs_img': 2, 'n_notdogs_img': 2, 'n_match': 3, 'n_correct_dogs': 2, 'n_correct_notdogs': 2, 'n_correct_breed': 2, 'pct_match': 75.0, 'pct_correct_dogs': 100.0, 'pct_correct_breed': 100.0, 'pct_correct_notdogs': 100.0}
+
+
+*** Results Summary for CNN Model Architecture ALEXNET ***
+N Images            :   4
+N Dog Images        :   2
+N Not-Dog Images    :   2
+ 
+Pct Match           : 75.00%
+Pct Correct Dogs    : 100.00%
+Pct Correct Breed   : 100.00%
+Pct Correct Notdogs : 100.00%
 
 ** Total Elapsed Runtime: 0:0:0
