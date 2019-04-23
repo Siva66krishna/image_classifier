@@ -43,6 +43,7 @@
 #       with this function
 # 
 def calculates_results_stats(results_dic):
+    print (results_dic)
     """
     Calculates statistics of the results of the program run using classifier's model 
     architecture to classifying pet images. Then puts the results statistics in a 

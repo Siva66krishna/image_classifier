@@ -78,9 +78,7 @@ def classify_images(images_dir, results_dic, model):
       
       #print(image_full_path)
       # Get the classifier label for the given image
-      image_classification = classifier(image_full_path, model)
-
-      # print(image_classification)
+      image_classification = classifier(image_full_path, model)      
 
       # Append the classifier label to the dictionary value (list) at index 1
       dic_value = results_dic.get(file_name_key)
@@ -92,5 +90,3 @@ def classify_images(images_dir, results_dic, model):
         dic_value.append(1)
       else:       
         dic_value.append(0)
-
-    #print(results_dic) 

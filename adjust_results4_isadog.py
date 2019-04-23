@@ -68,9 +68,7 @@ def adjust_results4_isadog(results_dic, dogfile):
            None - results_dic is mutable data type so no return needed.
     """  
     # Get the dictionary of dog names from the filename
-    dognames_dic = get_dog_name_dict(dogfile)
-
-    # print(dognames_dic)
+    dognames_dic = get_dog_name_dict(dogfile)    
 
     for key in results_dic:
       # Fetch the value (list) of each key into variable - value_list
@@ -81,35 +79,22 @@ def adjust_results4_isadog(results_dic, dogfile):
 
       # Read the elements from the list from index 1 - classified label
       classified_label = value_list[1]
-     
-     # print("PET_LABEL : {}, CLASS_LABEL : {}".format(pet_label, classified_label))
-     # print(dognames_dic.get(pet_label))
-     
-      # Check if the pet label is present in the dog names dictionary (file)
-      # if present append 1 to index position - 3 in the list - value_list
-      value_list.append(get_label_from_dict(dognames_dic, pet_label))
 
-      # Check if the classified label is present in the dog names dictionary (file)
-      # if present append 1 to index position - 4 in the list - value_list      
-      value_list.append(get_label_from_dict(dognames_dic, classified_label))
-    
-
-"""
-  Find the label in the dictionary and return 1 and 0
-  Parameters:
-    dognames_dic - Dictionary of dognames with Key: dogname and value : 1
-    label - the label to check in the dictionary
-  Return:
-    1 - if label found
-    0 - if label not found
-"""
-def get_label_from_dict(dognames_dic, label):
-  # if the key is foound in the dictionary - 1 is returned
-  # else - 0 (default value)
-  return dognames_dic.get(label, 0)
-
-
-
+      # Pet Image Label IS of Dog (e.g. found in dognames_dic)
+      if pet_label in dognames_dic:
+        # Classifier Label IS image of Dog (e.g. found in dognames_dic)
+        # appends (1, 1) because both labels are dogs
+        if classified_label in dognames_dic:
+          value_list.extend((1, 1))
+        else:
+          value_list.extend((1, 0))
+      else:
+        if classified_label in dognames_dic:
+          value_list.extend((0, 1))
+        else:
+          value_list.extend((0, 0))
+   
+   
 """
   Read the input file using the filename and convert the lines in the file to a dictionary
   Parameters:
@@ -128,13 +113,12 @@ def get_dog_name_dict(filename):
 
       # Processes each line in file until reaching EOF (end-of-file) by 
       # processing line and adding dognames to dognames_dic with while loop
-      while line != "":
+      while line != "":          
           linecount += 1
           # Remove the newline character from the variable - line  
           #
           # Process line by striping newline from line
-          line = line.strip().strip("/n")
-          
+          line = line.strip().rstrip("\n")          
           # check if the dogname(line) exists within dognames_dic, then if the dogname(line) 
           # doesn't exist within dognames_dic then add the dogname(line) 
           # to dognames_dic as the 'key' with the 'value' of 1. 
@@ -150,7 +134,4 @@ def get_dog_name_dict(filename):
 
 if __name__ == '__main__':
   dognames_dic = get_dog_name_dict("dognames.txt")
-  # print(dognames_dic)
-
-
-
+  #print(dognames_dic)
